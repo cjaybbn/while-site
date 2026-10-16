@@ -1,0 +1,187 @@
+/*
+ * While — web brand stylesheet
+ *
+ * §10.1, §10.4 and §10.5 of WHILE_MASTER_REFERENCE.md, applied to the web.
+ * One file so the three pages cannot drift apart.
+ *
+ * **Nunito is constant; the reading face is the platform's native grotesk, and
+ * on the web that stand-in is Inter** (§10.5). `system-ui` is not an option —
+ * it resolves to SF on a Mac, Segoe on Windows and Roboto on Android, so the
+ * same page would have three personalities.
+ *
+ * **Both faces are self-hosted, subset to latin, woff2, `font-display: swap`.**
+ * §10.5 forbids a third-party font CDN outright: it is an extra connection on
+ * first paint and a privacy liability. On these pages it would be worse than
+ * that — `privacy.html` says the app contacts nobody, and loading the page that
+ * says so from Google Fonts would contradict it in the act of claiming it.
+ *
+ * Both faces are SIL Open Font Licence; see `fonts/Nunito-OFL.txt` and
+ * `fonts/Inter-OFL.txt`. Five cuts, 89 KB in total.
+ */
+
+/* ---- Faces ---------------------------------------------------------- */
+
+@font-face {
+  font-family: "Nunito";
+  src: url("fonts/Nunito-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("fonts/Nunito-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/Inter-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/Inter-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- Tokens (§10.1) -------------------------------------------------- */
+
+:root {
+  --field:    #F4F1FF;
+  --surface:  #FFFFFF;
+  --text:     #1C1633;
+  --text2:    #575070;
+  --action:   #4027B4;
+  --earned:   #E33B62;
+  --line:     #E2DCF4;
+  --on-action:#FFFFFF;
+
+  /* §10.5: Nunito for display, Inter for everything you read. The fallbacks
+     are a native grotesk at the same weight — never a default serif (§10.4). */
+  --display: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --reading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --field:    #101013;
+    --surface:  #1A1A1F;
+    --text:     #F4F1FF;
+    --text2:    #9A9AA5;
+    /* §10.1: action inverts on the dark field — true indigo lands at 2.1:1 on
+       near-black. `earned` does not invert; rose means the same everywhere. */
+    --action:   #9173FF;
+    --line:     #2A2A31;
+    --on-action:#101013;
+  }
+}
+
+/* ---- Base ------------------------------------------------------------ */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 56px 20px 96px;
+  background: var(--field);
+  color: var(--text);
+  font-family: var(--reading);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* §10.4: tabular figures are non-negotiable in a product that is mostly a
+     running clock, and the habit carries to the web. */
+  font-variant-numeric: tabular-nums;
+}
+
+main { max-width: 680px; margin: 0 auto; }
+
+/* ---- Display type (§10.4's scale, web sizes from §10.5) -------------- */
+
+h1, h2, h3 {
+  font-family: var(--display);
+  color: var(--text);
+  margin: 0;
+}
+
+/* §10.5: display scales past the app's 40px cap on the web. Tracking goes
+   negative as size grows — optical correction, applied once, never by eye. */
+h1 { font-weight: 700; font-size: 44px; line-height: 1.1;  letter-spacing: -.03em; margin-bottom: 6px; }
+h2 { font-weight: 700; font-size: 26px; line-height: 1.2;  letter-spacing: -.02em; margin: 44px 0 10px; }
+h3 { font-weight: 600; font-size: 20px; line-height: 1.25; letter-spacing: -.015em; margin: 28px 0 6px; }
+
+/* **Nunito stops at 20px** (§10.4). Anything smaller is Inter: Nunito's
+   rounded terminals soften at small sizes and it has none of the optical
+   tuning a UI grotesk gets. A "heading" below 20px is Inter 600. */
+h4, .small-heading {
+  font-family: var(--reading);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0;
+  margin: 24px 0 4px;
+  color: var(--text);
+}
+
+p, li, td, th { color: var(--text2); }
+p { margin: 0 0 14px; }
+strong, b { color: var(--text); font-weight: 600; }
+
+.lede { color: var(--text); font-size: 19px; line-height: 1.5; }
+.meta { color: var(--text2); font-size: 15px; margin-bottom: 32px; }
+
+a { color: var(--action); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+ol, ul { padding-left: 22px; }
+li { margin-bottom: 6px; }
+
+/* ---- Surfaces (§10.6: 20–28px radii, lift by contrast, never by shadow) */
+
+.card {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 20px 22px;
+  margin: 18px 0;
+  color: var(--text2);
+}
+
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 16px; }
+th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+/* Sentence case everywhere, including table headers (§10.4). No ALL CAPS. */
+th { color: var(--text); font-weight: 600; }
+
+footer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--text2);
+}
+
+/* ---- The wordmark ---------------------------------------------------- */
+
+/* §9: the logotype is Nunito 700 "While." at −3% tracking, and the rose is
+   **only ever on the dot**. A looped or coloured wordmark reads as something
+   else entirely. The mark itself never appears without the wordmark, which is
+   why there is no lone symbol on these pages. */
+.wordmark {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--text);
+}
+.wordmark .dot { color: var(--earned); }
