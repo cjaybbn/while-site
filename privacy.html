@@ -27,12 +27,13 @@
 <body>
 <main>
   <h1>Privacy</h1>
-  <p class="meta">While. · Last updated 15 October 2026</p>
+  <p class="meta">While. · Last updated 16 October 2026</p>
 
   <p class="lede"><strong>While collects nothing.</strong> It has no accounts, no
   analytics, no advertising, no crash reporting of its own, and no server to send
-  anything to. The app contains no networking code at all — there is nothing in it
-  that can make a network request.</p>
+  anything to. The only network it ever uses is Apple's own, to check whether you
+  have a subscription — there is nothing else in the app that can make a
+  network request.</p>
 
   <p>Everything below is a consequence of that, written out so you can check it.</p>
 
@@ -89,8 +90,21 @@
   <h2>Third parties</h2>
   <p>There are none. While contains no third-party SDKs, no trackers and no
   analytics. The exercise photographs in the app are bundled with it, from the
-  public-domain <a href="https://github.com/yuhonas/free-exercise-db">free-exercise-db</a>
-  — they are already on your phone and are never fetched.</p>
+  public-domain <a href="https://github.com/yuhonas/free-exercise-db">free-exercise-db</a>,
+  as is the muscle data behind the body map; the anatomical drawing itself is from
+  <a href="https://github.com/HichamELBSI/react-native-body-highlighter">react-native-body-highlighter</a>
+  (MIT). All of it is already on your phone and none of it is ever fetched.</p>
+
+  <h2>Subscriptions</h2>
+  <p>While Plus is bought through Apple. <strong>While never sees your payment
+  details</strong> — not your card, not your name, not your Apple Account. Apple
+  tells the app one thing, which is whether a subscription is currently active,
+  and that answer is stored on your device like everything else. There is no
+  receipt server, no customer database and nothing for us to lose.</p>
+
+  <p>If you cancel, your banked minutes and your whole record stay exactly as they
+  are. Any app beyond the one the free plan holds is unlocked rather than kept
+  locked, and the app tells you when that happens.</p>
 
   <h2>Apple</h2>
   <p>If you install While from TestFlight or the App Store, Apple may collect its
@@ -114,7 +128,7 @@
   <h2>Contact</h2>
   <p>Questions: <a href="mailto:blackburncamden@gmail.com">blackburncamden@gmail.com</a></p>
 
-  <footer><span class="wordmark">While<span class="dot">.</span></span> · <a href="support.html">Support</a></footer>
+  <footer><span class="wordmark">While<span class="dot">.</span></span> · <a href="support.html">Support</a> · <a href="terms.html">Terms</a></footer>
 </main>
 </body>
 </html>
